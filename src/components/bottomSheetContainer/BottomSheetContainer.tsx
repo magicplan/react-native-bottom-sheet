@@ -5,8 +5,8 @@ import {
   type StyleProp,
   View,
   type ViewStyle,
+  useWindowDimensions,
 } from 'react-native';
-import { WINDOW_HEIGHT } from '../../constants';
 import { print } from '../../utilities';
 import { styles } from './styles';
 import type { BottomSheetContainerProps } from './types';
@@ -21,6 +21,8 @@ function BottomSheetContainerComponent({
   style,
   children,
 }: BottomSheetContainerProps) {
+  const { height: WINDOW_HEIGHT } = useWindowDimensions();
+
   const containerRef = useRef<View>(null);
   //#region styles
   const containerStyle = useMemo<StyleProp<ViewStyle>>(
@@ -73,7 +75,7 @@ function BottomSheetContainerComponent({
         },
       });
     },
-    [containerHeight, containerOffset]
+    [containerHeight, containerOffset, WINDOW_HEIGHT]
   );
   //#endregion
 
